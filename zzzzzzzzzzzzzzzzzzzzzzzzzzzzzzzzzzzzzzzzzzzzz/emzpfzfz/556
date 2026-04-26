@@ -208,6 +208,5 @@
 </body>
 </html>
 ]===]
-
-print("hello")
+{{CODE_LUA_ICI}}
 .
