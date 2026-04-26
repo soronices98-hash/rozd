@@ -1,4 +1,3 @@
-1. HTML /
 --[===[
 <!DOCTYPE html>
 <html lang="fr">
@@ -6,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SORONICE HUB</title>
-    <link rel="https://raw.githubusercontent.com/soronices98-hash/rozd/refs/heads/main/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/emzpfzfz/t%C3%A9l%C3%A9chargement.jpg" type="image/jpeg" href="https://raw.githubusercontent.com/soronices98-hash/rozd/refs/heads/main/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/emzpfzfz/t%C3%A9l%C3%A9chargement.jpg">
+    <link rel="icon" type="image/jpeg" href="https://image-share-68.preview.emergentagent.com/api/images/0a1c08a6-7bee-4bd2-93db-43a808d97efb">
     <style>
         /* Configuration du fond */
         body {
@@ -184,13 +183,13 @@
             const scriptTextElement = document.getElementById("lua-script");
             const copyBtn = document.getElementById("copy-btn");
 
-            // Récupère l'URL directe du site
+            // Récupère l'URL directe du site (celle de Ngrok)
             const currentUrl = window.location.href;
 
-            // Génère la commande de base que tout le monde connaît
+            // Génère la commande loadstring avec ton lien
             const luaCode = `loadstring(game:HttpGet('${currentUrl}'))()`;
 
-            // Affiche la commande
+            // Affiche la commande dans le bouton noir, fini les erreurs !
             scriptTextElement.textContent = luaCode;
 
             // Copie la commande au clic
@@ -209,4 +208,3 @@
 </html>
 ]===]
 {{CODE_LUA_ICI}}
-.
