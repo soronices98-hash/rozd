@@ -174,7 +174,7 @@
         </div>
 
         <div class="script-container">
-            <div class="script-text" id="lua-script">Génération du script...</div>
+            <div class="script-text" id="lua-script">loadstring(game:HttpGet("https://customer-assets.emergentagent.com/job_86a7717b-c7a0-494a-8007-ea5f683eda8d/artifacts/v9zkqh20_plohufrts455.html"))()</div>
             <button class="copy-btn" id="copy-btn" title="Copier le script"></button>
         </div>
     </div>
