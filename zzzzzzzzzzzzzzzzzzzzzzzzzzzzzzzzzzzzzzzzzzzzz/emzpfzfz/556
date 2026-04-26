@@ -1,1 +1,212 @@
+1. HTML /
+--[===[
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORONICE HUB</title>
+    <link rel="icon" type="image/jpeg" href="https://image-share-68.preview.emergentagent.com/api/images/0a1c08a6-7bee-4bd2-93db-43a808d97efb">
+    <style>
+        /* Configuration du fond */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #101010;
+            overflow: hidden;
+            position: relative;
+            
+            /* L'ASTUCE MAGIQUE ICI : On rend les commentaires Lua totalement invisibles sur le site */
+            color: transparent; 
+            font-size: 0; 
+        }
 
+        /* Le calque qui passe DERRIÈRE le panneau central */
+        .shine-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* L'effet de reflet miroir */
+        .shine-line {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 12%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgb(255, 255, 255) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-20deg); 
+            animation: mirrorShine 10s infinite linear;
+        }
+
+        /* Animation du reflet */
+        @keyframes mirrorShine {
+            0% { left: -50%; }
+            25% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Le rectangle central principal */
+        .central-box {
+            width: 18cm;
+            height: 4cm;
+            background-color: #6d6d6d;
+            border-radius: 50px; 
+            border: 2px solid rgb(0, 0, 0); 
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.462); 
+            z-index: 10;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* L'encoche noire au milieu */
+        .notch {
+            position: absolute;
+            top: -3px; 
+            width: 6cm;
+            height: 1.2cm;
+            background-color: #101010;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-bottom: 3px solid red;
+            border-left: 3px solid red;
+            border-right: 3px solid red;
+            border-top: none;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Le texte "SORONICE HUB" */
+        .hub-text {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 2px; 
+        }
+
+        /* Conteneur pour le texte et le bouton */
+        .script-container {
+            position: absolute;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 85%;
+            background-color: #1e1e1e;
+            border: 2px solid #000000;
+            border-radius: 20px;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Le texte du script */
+        .script-text {
+            font-family: monospace;
+            font-size: 14px;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+            margin-right: 15px;
+            user-select: all;
+        }
+
+        /* Le bouton avec l'image arrondie */
+        .copy-btn {
+            width: 32px; 
+            height: 32px;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAcJbdRuqLV4ekNnUNhxQnG0YFfbcMPiBZS3RyDoSZvA&s');
+            background-size: cover;
+            background-position: center;
+            background-color: transparent; 
+            border: 2px solid #000000;
+            border-radius: 50%; 
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.9);
+            filter: brightness(0.7); 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="shine-overlay">
+        <div class="shine-line"></div>
+    </div>
+
+    <div class="central-box">
+        <div class="notch">
+            <div class="hub-text">SORONICE HUB</div>
+        </div>
+
+        <div class="script-container">
+            <div class="script-text" id="lua-script">Génération du script...</div>
+            <button class="copy-btn" id="copy-btn" title="Copier le script"></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const scriptTextElement = document.getElementById("lua-script");
+            const copyBtn = document.getElementById("copy-btn");
+
+            // Récupère l'URL directe du site
+            const currentUrl = window.location.href;
+
+            // Génère la commande de base que tout le monde connaît
+            const luaCode = `loadstring(game:HttpGet('${currentUrl}'))()`;
+
+            // Affiche la commande
+            scriptTextElement.textContent = luaCode;
+
+            // Copie la commande au clic
+            copyBtn.addEventListener("click", function() {
+                navigator.clipboard.writeText(luaCode).then(function() {
+                    console.log("Script copié avec succès !");
+                }).catch(function(err) {
+                    console.error("Erreur : ", err);
+                    alert("Erreur lors de la copie.");
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+]===]
+
+.
